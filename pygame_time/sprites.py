@@ -45,15 +45,13 @@ class Player(pg.sprite.Sprite):
             self.acc.x = PLAYER_ACC
 
         # apply friction
-        self.acc.x += self.vel.x * PLAYER_FRICTION
+        if self.rect.x < WIDTH * (2/3):
+            self.acc.x += self.vel.x * PLAYER_FRICTION
+        else:
+            self.acc.x = -0.03
         # equations of motion
         self.vel += self.acc
         self.pos += self.vel + 0.5 * self.acc
-        # wrap around the sides of the screen
-        if self.pos.x > WIDTH:
-            self.pos.x = 0
-        if self.pos.x < 0:
-            self.pos.x = WIDTH
 
             
         self.rect.midbottom = self.pos

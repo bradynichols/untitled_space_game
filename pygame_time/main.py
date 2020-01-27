@@ -61,20 +61,30 @@ class Game:
             if hits:
                 self.player.pos.y = hits[0].rect.top
                 self.player.vel.y = 0
-        # if player reaches top 1/4 of the screen
-        if self.player.rect.top <= HEIGHT / 4:
-            self.player.pos.y +=abs(self.player.vel.y)
+
+        # Scroll left
+        # if self.player.rect.x <= WIDTH / 4:
+        #     self.player.pos.x +=abs(self.player.vel.x)
+        #     for plat in self.platforms:
+        #         plat.rect.x += abs(self.player.vel.x)
+        #     if plat.rect.x <= WIDTH:
+        #             plat.kill()
+        #             self.score += 10
+
+        # Scroll right
+        if self.player.rect.x >= WIDTH * (2/3):
+            self.player.pos.x -= abs(self.player.vel.x)
             for plat in self.platforms:
-                plat.rect.y += abs(self.player.vel.y)
-                if plat.rect.top >= HEIGHT:
+                plat.rect.x -= abs(self.player.vel.x)
+                if plat.rect.x + plat.image.get_width() <= 0:
                     plat.kill()
                     self.score += 10
         
         # spawn new platforms to keep same average number
-        while len(self.platforms) < 6:
+        while len(self.platforms) < 8:
             width = random.randrange(50, 100)
-            p = Platform(random.randrange(0, WIDTH-width),
-                        random.randrange(-75, -30),
+            p = Platform(random.randrange(WIDTH * 2/3, WIDTH + 100),
+                        random.randrange(250, HEIGHT),
                         width, 20)
             self.platforms.add(p)
             self.all_sprites.add(p)
