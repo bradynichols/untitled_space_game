@@ -4,7 +4,7 @@ Unfortunately, this was not able to be implemented in the timeframe due to issue
 
 (in Class Player)
 (in update())
-	# accelerates the player towards the nearest platform
+    # accelerates the player towards the nearest platform
     self.acc = attract()
 
 def attract(self):
