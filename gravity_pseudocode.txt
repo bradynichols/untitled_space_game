@@ -1,0 +1,17 @@
+Some pseudocode that should find the nearest object to the player and attract the player towards the center of it.
+Unfortunately, this was not able to be implemented in the timeframe due to issues with generating circles.
+(See Class Planet in sprites.py)
+
+(in Class Player)
+(in update())
+	# accelerates the player towards the nearest platform
+    self.acc = attract()
+
+def attract(self):
+	int closestplatcoords
+	int closestplatdist = 99999999
+	for plat in self.game.platforms:
+		if self.pos.distance_to(plat.rect) < closestplatdist:
+			closestplatcoords = plat.rect
+	# Return vector2d object that points from the player to the nearest object
+	return (self.pos - plat.rect) / 100 
